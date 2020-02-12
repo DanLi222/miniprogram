@@ -1,0 +1,14 @@
+<view class="container list-container">
+  <view class="list-item">
+    <view class="left">
+      <image class="left" src="{{imagePath}}"></image>
+    </view>
+    <view class="right">
+      <view>{{text}}</view>
+      <view wx:for="{{manufacturer_list}}" bindtap="handleTap" data-id="{{index}}">{{item.manufacturer}}
+      </view>
+    </view>
+  </view>
+</view>
+
+ 
