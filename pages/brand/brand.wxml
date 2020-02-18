@@ -1,4 +1,4 @@
 <view>{{manufacturer}}</view>
-<view wx:for="{{price_list}}"  data-id="{{index}}">
-<image class="left" src="{{item.pic}}"></image>
+<view wx:for="{{models_list}}"  data-id="{{index}}">
+<image class="left" src="{{item.imagePath}}"></image>
 {{item.model}} {{item.price}}</view>
