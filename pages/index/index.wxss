@@ -1,10 +1,9 @@
-.container{
+.brand{
   height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: center; 
   justify-content: space-between;
-  padding: 200rpx;
+  padding: 20rpx;
   box-sizing: border-box;
 }
 .list-container{
@@ -16,14 +15,18 @@
   flex-direction: row;
   padding: 20rpx
 }
-.left{
-  width:100rpx;
-  height: 100rpx;
+.brandImage{
+  width:110rpx;
+  height: 110rpx;
+  object-fit: contain;
 }
-.right{
-  width: 590rpx;
-  height: 100rpx;
-  margin-left: 20rpx;
+.brandName{
+  width: 550rpx;
+  height: 110rpx;
   display: flex;
-  flex-direction: column
+  line-height: 100rpx;
+  font-family: "微软雅黑", Arial, sans-serif;
+  border-bottom: 1rpx solid lightgrey;
 }
+
+

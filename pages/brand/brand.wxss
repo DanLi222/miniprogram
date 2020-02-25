@@ -1,4 +1,30 @@
-.left{
-  width:100rpx;
-  height: 100rpx;
+.manufacterer{
+  padding: 20rpx;
+  color: rgba(124, 125, 160, 0.815);
+}
+.model{
+  height: 100%;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.modelImage{
+  width:150rpx;
+  height: 150rpx;
+  object-fit: contain;
+}
+.modelName{
+  width: 500rpx;
+  height: 150rpx;
+  display: flex;
+  line-height: 70rpx;
+  font-family: "微软雅黑", Arial, sans-serif;
+  border-bottom: 1rpx solid lightgrey;
+  font-size: large;
+}
+.modelPrice{
+  font-size:small;
+  color: rgb(219, 33, 27);
 }

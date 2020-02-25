@@ -13,7 +13,7 @@ Page({
         fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/model/' 
                + model.manufacturer 
                +'/'
-               + model.model + '.jpg',
+               + model.model + '.png',
         success: res =>{
           model.imagePath = res.tempFilePath;
           this.setData({
