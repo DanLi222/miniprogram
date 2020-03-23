@@ -27,6 +27,22 @@ Page({
       });
     })
   },
+  getList: function(number){
+    for(var i = 0; i <= number; i = i+20){
+      db.collection('manufacturer').skip(i).get({
+        success: v => {
+          var list = this.data.manufacturer_list;
+          list = list.concat(v.data);
+          this.setData({
+            manufacturer_list: list
+          })
+          if(list.length === number){
+            this.showPicture(this.data.manufacturer_list);
+          }
+        }
+      })
+    }
+  },
   onLoad:function(){
     // db.collection('manufacturer').orderBy('pingying', 'asc').get({
     //   success: res => {
@@ -40,18 +56,7 @@ Page({
     db.collection('manufacturer').count({
       success: function(res){
         var number = res.total;
-        for(var i = 0; i <= number; i = i+20){
-          db.collection('manufacturer').skip(i).get({
-            success: v => {
-              var list = that.data.manufacturer_list;
-              list = list.concat(v.data);
-              that.setData({
-                manufacturer_list: list
-              })
-              that.showPicture(that.data.manufacturer_list);
-            }
-          })
-        }
+        that.getList(number);
       }
     })
       
