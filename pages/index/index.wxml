@@ -1,4 +1,15 @@
-<view class="brand" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">
-  <div class="imageContainer"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></div>
-  <text class="brandName">{{item.pingying}}</text>
+<view class="container">
+  <ul class="topSearchHistoryContainer">
+    <li class="searchHistoryContainer" wx:for="{{searchHistory}}" bindtap="handleSearchHistoryTap" id="{{index}}">
+      <span class="searchHistoryItemBox"><text class="searchHistoryItem">{{item}}</text></span>
+    </li>
+  </ul>
+  <div class="topBrandContainer">
+    <ul class="brandContainer">
+      <li class="brand" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">
+        <div class="imageContainer"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></div>
+        <text class="brandName">{{item.manufacturer}}</text>
+      </li>
+    </ul>
+  </div>
 </view>

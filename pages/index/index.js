@@ -1,18 +1,25 @@
 const db = wx.cloud.database({});
+const fs = wx.getFileSystemManager()
+const SEARCH_HISTORY = 'searchHistory';
+
 Page({
   data:{
     manufacturer_list: [],
-    imagePath:""
+    imagePath:"",
+    searchHistory: []
   },
   handleTap: function (e) {
     var manufacturer_list = this.data.manufacturer_list;
     var manufacturer = manufacturer_list[parseInt(e.currentTarget.id)].manufacturer;
+    this.addToSearchHistory(manufacturer);
     wx.navigateTo({
       url: '../brand/brand?manufacturer=' + manufacturer,
     })
   },
+  handleSearchHistoryTap: function (e) {
+    console.log(e);
+  },
   showPicture: function(list){
-    console.log(list)
     list.forEach(brand => {
       wx.cloud.downloadFile({
         fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/brand/' 
@@ -50,14 +57,6 @@ Page({
     }
   },
   onLoad:function(){
-    // db.collection('manufacturer').orderBy('pingying', 'asc').get({
-    //   success: res => {
-    //     this.setData({
-    //       manufacturer_list: res.data
-    //     })
-    //     this.showPicture(this.data.manufacturer_list);
-    //   }
-    // });
     var that = this;
     db.collection('manufacturer')
     .where({deleted_at: ""})
@@ -67,11 +66,38 @@ Page({
         that.getList(number);
       }
     })
-      
+  },
+  findOrCreateFile: function(){
+    var files = fs.readdirSync(`${wx.env.USER_DATA_PATH}`)
+    if(files.includes(SEARCH_HISTORY)){
+      console.log("Search History File found");
+    } else {
+       console.log("Search History File not found, creating..");
+      fs.writeFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, '', 'utf8');
+    }
+  },
+  loadSearchHistory: function(){
+    var history = fs.readFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, 'utf8');
+    var searchHistory = history.split(',');
+    searchHistory.pop();
+    var length = searchHistory.length;
+    searchHistory = searchHistory.slice(Math.max(0,length - 4),length);
 
+    if(length > 4) {
+      fs.writeFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, searchHistory.toString()+',', 'utf8');
+    }
+    searchHistory = searchHistory.reverse();
+
+    this.setData({
+      searchHistory: searchHistory
+    })
+  },
+  addToSearchHistory: function(manufacturer){
+    fs.appendFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, manufacturer + ',', 'utf8');
   },
   onShow:function(){
-
+    this.findOrCreateFile();
+    this.loadSearchHistory();
   },
   onReady:function(){
 
