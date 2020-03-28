@@ -4,16 +4,14 @@ Page({
     manufacturer_list: [],
     imagePath:""
   },
-
   handleTap: function (e) {
     var manufacturer_list = this.data.manufacturer_list;
-    console.log(e.currentTarget.id);
     var manufacturer = manufacturer_list[parseInt(e.currentTarget.id)].manufacturer;
     wx.navigateTo({
       url: '../brand/brand?manufacturer=' + manufacturer,
     })
   },
-  showPicture:function(list){
+  showPicture: function(list){
     list.forEach(brand => {
       wx.cloud.downloadFile({
         fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/brand/' 
@@ -33,6 +31,12 @@ Page({
         success: v => {
           var list = this.data.manufacturer_list;
           list = list.concat(v.data);
+          console.log(list);
+          list = list.sort(function(a, b){
+            if(a.pingying < b.pingying) { return -1; }
+            if(a.pingying > b.pingying) { return 1; }
+            return 0;
+          })
           this.setData({
             manufacturer_list: list
           })
