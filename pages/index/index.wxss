@@ -16,9 +16,11 @@
   padding: 20rpx
 }
 .brandImage{
+  width:100%;
+}
+.imageContainer{
   width:110rpx;
-  height: 110rpx;
-  object-fit: contain;
+  height:110rpx;
 }
 .brandName{
   width: 550rpx;

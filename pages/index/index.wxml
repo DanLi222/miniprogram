@@ -1,7 +1,4 @@
 <view class="brand" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">
-  <image class="brandImage" src="{{item.imagePath}}"></image>
-  <text class="brandName">{{item.manufacturer}}</text>
+  <div class="imageContainer"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></div>
+  <text class="brandName">{{item.pingying}}</text>
 </view>
-
-
- 
