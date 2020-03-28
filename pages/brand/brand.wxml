@@ -1,6 +1,6 @@
 <view class="manufacterer">{{manufacturer}}</view>
 <view class="model" wx:for="{{models_list}}"  data-id="{{index}}">
-  <image class="modelImage" src="{{item.imagePath}}"></image>
+  <image class="modelImage" src="{{item.imagePath}}" mode="widthFix"></image>
   <text class="modelName">{{item.model}}
     <text class="modelPrice">{{item.price}}</text>
   </text>
