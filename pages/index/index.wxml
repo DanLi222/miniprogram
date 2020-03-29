@@ -1,9 +1,17 @@
 <view class="container">
   <ul class="topSearchHistoryContainer">
-    <li class="searchHistoryContainer" wx:for="{{searchHistory}}" bindtap="handleSearchHistoryTap" id="{{index}}">
+    <li class="searchHistoryContainer" wx:for="{{searchHistory}}" bindtap="handleSearchHistoryTap" id="{{item}}">
       <span class="searchHistoryItemBox"><text class="searchHistoryItem">{{item}}</text></span>
     </li>
   </ul>
+  <span class="scrollmenu">
+    <image src="{{carouselImg}}" bindtap="handleDotTap" id="0"></image>
+  </span>
+  <div class="dotContainer">
+    <span class="dot" bindtap="handleDotTap" id="1"></span> 
+    <span class="dot" bindtap="handleDotTap" id="2"></span> 
+    <span class="dot" bindtap="handleDotTap" id="3"></span> 
+  </div>
   <div class="topBrandContainer">
     <ul class="brandContainer">
       <li class="brand" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">

@@ -12,6 +12,7 @@
 }
 .modelImage{
   width:150rpx;
+  height:150rpx;
   object-fit: contain;
 }
 .modelName{
