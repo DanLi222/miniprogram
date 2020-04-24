@@ -1,44 +1,59 @@
 const db = wx.cloud.database({});
-const fs = wx.getFileSystemManager();
-const SEARCH_HISTORY = 'searchHistory';
-var timer = 10000;
-var carouselPaths = [];
-var currentCarousel = 0;
-var timeoutID = 0;
-var historyTracking = true;
 
 Page({
   data:{
     manufacturer_list: [],
-    imagePath:"",
     searchHistory: [],
-    carouselImg:""
+    showHistory: false
+  },
+  clearSearchHistory: function(){
+    wx.removeStorage({
+      key: 'searchHistory',
+      success (res) {
+      console.log(res)
+      }
+      })
+    //wx.removeStorageSync('searchHistory');
+    this.setData({
+      searchHistory: [],
+      showHistory: false,
+    })
+  },
+  loadSearchHistory: function(){
+    this.getSearchHistory();
+  },
+  setSearchHistory: function(history){
+    var historyList = this.data.searchHistory;
+    var exist = historyList.indexOf(history);
+    if(exist != -1){
+      historyList.splice(exist, 1);
+    }
+    if(historyList.length>3){
+        historyList.pop();
+    }
+    historyList.unshift(history);
+      this.setData({
+        searchHistory: historyList
+      });
+    wx.setStorageSync('searchHistory', this.data.searchHistory);
+  },
+  getSearchHistory: function(){
+    var that = this;
+    wx.getStorage({
+      key: 'searchHistory',
+      success: function(res){
+          that.setData({
+            searchHistory: res.data
+          })  
+      }
+    })
   },
   handleTap: function (e) {
     var manufacturer_list = this.data.manufacturer_list;
     var manufacturer = manufacturer_list[parseInt(e.currentTarget.id)].manufacturer;
-    this.addToSearchHistory(manufacturer);
+    this.setSearchHistory(manufacturer);
     wx.navigateTo({
       url: '../brand/brand?manufacturer=' + manufacturer,
-    })
-  },
-  handleSearchHistoryTap: function (e) {
-    wx.navigateTo({
-      url: '../brand/brand?manufacturer=' + e.currentTarget.id,
-    })
-
-  },
-  handleDotTap: function (e) {
-    if(e == undefined || parseInt(e.target.id) == 0) {
-      currentCarousel += 1;
-      if(currentCarousel > 2) {
-        currentCarousel = 0;
-      }
-    } else {
-      currentCarousel = parseInt(e.target.id) - 1;
-    }
-    this.setData({
-      carouselImg: carouselPaths[currentCarousel]
     })
   },
   showPicture: function(list){
@@ -49,7 +64,7 @@ Page({
         success: res =>{
           brand.imagePath = res.tempFilePath;
           this.setData({
-            manufacturer_list: list,
+            manufacturer_list: list
           })
         }
       });
@@ -79,7 +94,6 @@ Page({
     }
   },
   onLoad:function(){
-    this.downloadCarousel();
     var that = this;
     db.collection('manufacturer')
     .where({deleted_at: ""})
@@ -90,74 +104,11 @@ Page({
       }
     })
   },
-  findOrCreateFile: function(){
-    if(historyTracking){
-      var files = fs.readdirSync(`${wx.env.USER_DATA_PATH}`)
-      if(files.includes(SEARCH_HISTORY)){
-        console.log("Search History File found");
-      } else {
-        try{
-          console.log("Search History File not found, creating..");
-          fs.writeFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, '', 'utf8');
-        } catch(err){
-          console.log("Unable to write file");
-          historyTracking = false;
-        }
-      }
-    }
-  },
-  loadSearchHistory: function(){
-    if(historyTracking){
-      var history = fs.readFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, 'utf8');
-      var searchHistory = history.split(',');
-      searchHistory.pop();
-      var length = searchHistory.length;
-      searchHistory = searchHistory.slice(Math.max(0,length - 4),length);
-
-      if(length > 4) {
-        fs.writeFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, searchHistory.toString()+',', 'utf8');
-      }
-      searchHistory = searchHistory.reverse();
-
-      this.setData({
-        searchHistory: searchHistory
-      })
-    }
-  },
-  addToSearchHistory: function(manufacturer){
-    if(historyTracking){
-      var history = fs.readFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, 'utf8');
-      if(!history.includes(manufacturer)){
-        fs.appendFileSync(`${wx.env.USER_DATA_PATH}/` + SEARCH_HISTORY, manufacturer + ',', 'utf8');
-      }
-    }
-  },
   onShow:function(){
-    this.findOrCreateFile();
     this.loadSearchHistory();
-    timeoutID = setInterval(this.handleDotTap, timer);
   },
   onReady:function(){
-
   },
   onHide:function(){
-    clearTimeout(timeoutID);
   },
-  downloadCarousel:function(){
-    var that = this;
-    [1,2,3].forEach(function(i){
-      wx.cloud.downloadFile({
-        fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/carousel/auto' 
-              + i + '.jpg',
-        success: res =>{
-          carouselPaths[i - 1] = res.tempFilePath;
-          if(carouselPaths[0] != undefined){
-            that.setData({
-              carouselImg: carouselPaths[0]
-            })
-          }
-        }
-      })
-    });
-  }
 })

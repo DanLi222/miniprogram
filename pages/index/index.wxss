@@ -1,19 +1,57 @@
 .container{
-  display:inline-block;
+  margin:3%;
 }
-.topBrandContainer{
+.searchHistoryContainer{
+  width: 95%;
+  max-height: 30%;
+}
+.searchHistoryTitle{
+  max-height: 40%;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.searchHistoryTitleText{
+  font-weight: bold;
+  max-width: 80%;
+}
+.deleteImage{
+  width: 30rpx;
+  height: 30rpx;
+  align-items: flex-end;
+}
+.searchHistoryList{
+  width: 100%;
+  font-family: "微软雅黑", Arial, sans-serif;
+  max-height: 60%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+}
+.searchHistoryItemBox{
+  width: fit-content;
+  height: 78%;
+  border-radius: 20px;
+  background-color: rgba(231, 228, 228, 0.575);
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 30rpx;
+  margin-top: 15rpx;
+  padding-top: 10rpx; 
+}
+.searchHistoryItem{
+  padding: 20rpx;
+  width: 80%;
   height: 100%;
-  display: block;
+  color: black;
   position: relative;
-  top:50rpx;
 }
 .brandContainer{
-  scroll-padding-top: 15%;
-  overflow: auto;
-  height: 75%;
-  position:relative;
+  margin-top: 60rpx;
 }
-.brand{
+.brandList{
   height: 100%;
   display: flex;
   align-items: center; 
@@ -21,21 +59,12 @@
   padding: 20rpx;
   box-sizing: border-box;
 }
-.list-container{
-  padding: 0
-}
-.list-item{
-  height: 100rpx;
-  display: flex;
-  flex-direction: row;
-  padding: 20rpx
+.brandImageContainer{
+  width: 110rpx;
+  height: 110rpx;
 }
 .brandImage{
-  width:100%;
-}
-.imageContainer{
-  width:110rpx;
-  height:110rpx;
+  width: 100%;
 }
 .brandName{
   width: 550rpx;
@@ -44,69 +73,10 @@
   line-height: 100rpx;
   font-family: "微软雅黑", Arial, sans-serif;
   border-bottom: 1rpx solid lightgrey;
+  margin-left: 5%;
 }
-.topSearchHistoryContainer{
-  position:fixed;
-  width: 100%;
-  background-color: #f6f6f6;
-  z-index: 4;
-}
-.searchHistoryContainer{
-  width:100%;
-  height:15%;
-  white-space: nowrap;
-}
-.searchHistoryItemBox{
-  width:fit-content;
-  height:90%;
-  border-radius:10px;
-  background-color: gainsboro;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 2%;
-}
-.searchHistoryItem{
-  padding:15rpx;
-  width:90%;
-  height:100%;
-  color: black;
-  position: relative;
-}
-span.scrollmenu {
-  background-color: #f6f6f6;
-  overflow: auto;
-  white-space: nowrap;
-  height: 100%;
-  display: block;
-  position: relative;
-  margin-top: 12%;
-  width:100%;
-}
-span.scrollmenu image {
-  display: inline-block;
-  text-align: center;
-  padding: 2%;
-  width:96%;
-  max-height:300rpx;
-}
-.dotContainer{
-  width: 100%;
-  text-align:center;
-  position: absolute;
-  z-index: 2;
-}
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-  z-index: 3;
-}
-.active {
-  background-color: #717171;
-}
+
+
+
+
+

@@ -1,7 +1,14 @@
-<view class="manufacterer">{{manufacturer}}</view>
-<view class="model" wx:for="{{models_list}}"  data-id="{{index}}">
-  <image class="modelImage" src="{{item.imagePath}}" mode="widthFix"></image>
-  <text class="modelName">{{item.model}}
-    <text class="modelPrice">{{item.price}}</text>
-  </text>
+<view class="container">
+  <view class="manufactererContainer">
+    <text>{{manufacturer}}</text>
+  </view>
+
+  <view class="modelList" wx:for="{{models_list}}"  data-id="{{index}}">
+    <view class="modelImageContainer">
+      <image class="modelImage" src="{{item.imagePath}}" mode="widthFix"></image>
+    </view>
+    <text class="modelName">{{item.model}}
+      <text class="modelPrice">{{item.price}}</text>
+    </text>
+  </view>
 </view>

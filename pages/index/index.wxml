@@ -1,23 +1,23 @@
 <view class="container">
-  <ul class="topSearchHistoryContainer">
-    <li class="searchHistoryContainer" wx:for="{{searchHistory}}" bindtap="handleSearchHistoryTap" id="{{item}}">
-      <span class="searchHistoryItemBox"><text class="searchHistoryItem">{{item}}</text></span>
-    </li>
-  </ul>
-  <span class="scrollmenu">
-    <image src="{{carouselImg}}" bindtap="handleDotTap" id="0"></image>
-  </span>
-  <div class="dotContainer">
-    <span class="dot" bindtap="handleDotTap" id="1"></span> 
-    <span class="dot" bindtap="handleDotTap" id="2"></span> 
-    <span class="dot" bindtap="handleDotTap" id="3"></span> 
-  </div>
-  <div class="topBrandContainer">
-    <ul class="brandContainer">
-      <li class="brand" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">
-        <div class="imageContainer"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></div>
-        <text class="brandName">{{item.manufacturer}}</text>
-      </li>
-    </ul>
-  </div>
+  <view class="searchHistoryContainer">
+    <view class="searchHistoryTitle">
+      <view class="searchHistoryTitleText">最近浏览</view>
+        <image class="deleteImage" src="../../images/delete.png" wx:if="{{searchHistory.length!=0}}" catchtap="clearSearchHistory"></image>
+    </view>
+
+    <view class="searchHistoryList" >
+      <view wx:for="{{searchHistory}}" wx:key="item">
+      <view class="searchHistoryItemBox">
+        <text class="searchHistoryItem">{{item}}</text>
+      </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="brandContainer">
+    <view class="brandList" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">
+      <view class="brandImageContainer"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></view>
+      <text class="brandName">{{item.manufacturer}}</text>
+    </view>
+  </view>
 </view>
