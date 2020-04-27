@@ -1,22 +1,18 @@
 const db = wx.cloud.database({});
+const swiperInit = ["auto1","auto2","auto3"];
 
 Page({
   data:{
     manufacturer_list: [],
     searchHistory: [],
-    showHistory: false
+    swiperImage: [],
   },
   clearSearchHistory: function(){
     wx.removeStorage({
-      key: 'searchHistory',
-      success (res) {
-      console.log(res)
-      }
+      key: 'searchHistory'
       })
-    //wx.removeStorageSync('searchHistory');
     this.setData({
       searchHistory: [],
-      showHistory: false,
     })
   },
   loadSearchHistory: function(){
@@ -48,12 +44,35 @@ Page({
       }
     })
   },
-  handleTap: function (e) {
+  searchTap: function(e) {
+    var manufacturer = this.data.searchHistory[e.currentTarget.id];
+    this.navigateToBrand(manufacturer);
+  },
+  brandListTap: function(e) {
     var manufacturer_list = this.data.manufacturer_list;
     var manufacturer = manufacturer_list[parseInt(e.currentTarget.id)].manufacturer;
+    this.navigateToBrand(manufacturer);
+  },
+  navigateToBrand: function(manufacturer){
     this.setSearchHistory(manufacturer);
     wx.navigateTo({
       url: '../brand/brand?manufacturer=' + manufacturer,
+    })
+  },
+  getSwiperImage: function(imageList){
+    var that = this;
+    var list = [];
+    imageList.forEach(image => {
+      wx.cloud.downloadFile({
+        fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/carousel/' 
+               + image + '.jpg',
+        success: res =>{
+          list.push(res.tempFilePath);
+          that.setData({
+            swiperImage: list
+          })
+        }
+      });
     })
   },
   showPicture: function(list){
@@ -95,6 +114,7 @@ Page({
   },
   onLoad:function(){
     var that = this;
+    this.getSwiperImage(swiperInit);
     db.collection('manufacturer')
     .where({deleted_at: ""})
     .count({
@@ -102,7 +122,7 @@ Page({
         var number = res.total;
         that.getList(number);
       }
-    })
+    });
   },
   onShow:function(){
     this.loadSearchHistory();

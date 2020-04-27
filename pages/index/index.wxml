@@ -1,23 +1,36 @@
 <view class="container">
-  <view class="searchHistoryContainer">
-    <view class="searchHistoryTitle">
-      <view class="searchHistoryTitleText">最近浏览</view>
-        <image class="deleteImage" src="../../images/delete.png" wx:if="{{searchHistory.length!=0}}" catchtap="clearSearchHistory"></image>
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <swiper 
+        indicator-dots="true" autoplay="true" circular="true" duration="1000" interval="2000">
+        <block wx:for="{{swiperImage}}" wx:key="*this">
+          <swiper-item>
+            <image class="swiper-item" wx:if="{{swiperImage.length!=0}}" src="{{item}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
     </view>
 
-    <view class="searchHistoryList" >
-      <view wx:for="{{searchHistory}}" wx:key="item">
-      <view class="searchHistoryItemBox">
-        <text class="searchHistoryItem">{{item}}</text>
+    <view class="page-section page-section-gap">
+      <view class="page-section-searchHistory title">
+        <view>最近浏览</view>
+          <image class="deleteImage" src="../../images/delete.png" wx:if="{{searchHistory.length!=0}}" catchtap="clearSearchHistory"></image>
       </view>
+
+      <view class="page-section-searchHistory" >
+        <view wx:for="{{searchHistory}}" wx:key="searchHistoryItem">
+        <view class="page-section-searchBox">
+          <view class="page-section-item" bindtap="searchTap" id="{{index}}">{{item}}</view>
+        </view>
+        </view>
       </view>
     </view>
-  </view>
-  
-  <view class="brandContainer">
-    <view class="brandList" wx:for="{{manufacturer_list}}" bindtap="handleTap" id="{{index}}">
-      <view class="brandImageContainer"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></view>
-      <text class="brandName">{{item.manufacturer}}</text>
+    
+    <view class="page-section">
+      <view class="page-section-item" wx:for="{{manufacturer_list}}" bindtap="brandListTap" id="{{index}}">
+        <view class="brandImageBox"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></view>
+        <text class="brandNameBox">{{item.manufacturer}}</text>
+      </view>
     </view>
   </view>
 </view>
