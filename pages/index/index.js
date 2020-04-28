@@ -1,60 +1,26 @@
+var utils = require('../../utils/search.js')
 const db = wx.cloud.database({});
 const swiperInit = ["auto1","auto2","auto3"];
 
 Page({
   data:{
     manufacturer_list: [],
-    searchHistory: [],
+    searchHistory: utils.getSearchHistory(),
     swiperImage: [],
   },
   clearSearchHistory: function(){
-    wx.removeStorage({
-      key: 'searchHistory'
-      })
     this.setData({
-      searchHistory: [],
-    })
-  },
-  loadSearchHistory: function(){
-    this.getSearchHistory();
-  },
-  setSearchHistory: function(history){
-    var historyList = this.data.searchHistory;
-    var exist = historyList.indexOf(history);
-    if(exist != -1){
-      historyList.splice(exist, 1);
-    }
-    if(historyList.length>3){
-        historyList.pop();
-    }
-    historyList.unshift(history);
-      this.setData({
-        searchHistory: historyList
-      });
-    wx.setStorageSync('searchHistory', this.data.searchHistory);
-  },
-  getSearchHistory: function(){
-    var that = this;
-    wx.getStorage({
-      key: 'searchHistory',
-      success: function(res){
-          that.setData({
-            searchHistory: res.data
-          })  
-      }
+      searchHistory: utils.clearSearchHistory()
     })
   },
   searchTap: function(e) {
-    var manufacturer = this.data.searchHistory[e.currentTarget.id];
-    this.navigateToBrand(manufacturer);
+    this.navigateToBrand(this.data.searchHistory[e.currentTarget.id]);
   },
   brandListTap: function(e) {
-    var manufacturer_list = this.data.manufacturer_list;
-    var manufacturer = manufacturer_list[parseInt(e.currentTarget.id)].manufacturer;
-    this.navigateToBrand(manufacturer);
+    this.navigateToBrand(this.data.manufacturer_list[parseInt(e.currentTarget.id)].manufacturer);
   },
   navigateToBrand: function(manufacturer){
-    this.setSearchHistory(manufacturer);
+    utils.setSearchHistory(manufacturer);
     wx.navigateTo({
       url: '../brand/brand?manufacturer=' + manufacturer,
     })
@@ -125,10 +91,8 @@ Page({
     });
   },
   onShow:function(){
-    this.loadSearchHistory();
-  },
-  onReady:function(){
-  },
-  onHide:function(){
+    this.setData({
+      searchHistory: utils.getSearchHistory()
+    })
   },
 })
