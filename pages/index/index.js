@@ -31,10 +31,9 @@ Page({
     ],
   },
   /**
-   * App life cycle function onLoad
-   * 1. Load 3 swiper images
-   * 2. Load brand list with images
-   * 3. Load searchHistory
+   * Load 3 swiper images
+   * Load brand list with images
+   * Load searchHistory
    */
   onLoad:function(){
     this.getSwiperImage();
@@ -42,7 +41,6 @@ Page({
     this.loadSearchHistory();
   },
   /**
-   * App life cycle function onShow
    * Load searchHistory when redirecting to this page
    */
   onShow:function(){
@@ -50,7 +48,6 @@ Page({
   },
 
   /**
-   * OnClick event
    * Navigate to corresponding brand page
    * @param {event} e - The current event
    */
@@ -58,7 +55,6 @@ Page({
     this.navigateToBrand(this.data.searchHistory[e.currentTarget.id]);
   },
   /**
-   * OnClick event
    * Navigate to corresponding brand page
    * @param {event} e - The current event
    */
@@ -94,14 +90,12 @@ Page({
   },
 
   /**
-   * Search history block function loadSearchHistory
    * Get search history from storage and set page data searchHistory
    */
   loadSearchHistory: function(){
     search.getSearchHistory(this.setSearchHistory)
   },
   /**
-   * Search history block function clearSearchHistory
    * Clean page data searchHistory to empty
    */
   clearSearchHistory: function(){
@@ -109,6 +103,10 @@ Page({
       searchHistory: search.clearSearchHistory()
     })
   },
+  /**
+   * Set page data searchHistoty
+   * @param {array} list - The list downloaded from storage
+   */
   setSearchHistory: function(list){
     this.setData({
       searchHistory: list

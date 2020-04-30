@@ -1,4 +1,3 @@
-@import "../../style/weui.wxss";
 page{
   font-family: "微软雅黑", Arial, sans-serif;
 }
