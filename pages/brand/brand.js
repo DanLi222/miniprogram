@@ -1,3 +1,5 @@
+var cloud = require('../../utils/cloud.js')
+
 const db = wx.cloud.database({});
 const _ = db.command;
 
@@ -6,43 +8,29 @@ Page({
     manufacturer:"",
     models_list: [],
   },
-
-  showPicture:function(list){
-    list.forEach(model => {
-      wx.cloud.downloadFile({
-        fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/model/' 
-               + model.manufacturer 
-               +'/'
-               + model.model + '.png',
-        success: res =>{
-          model.imagePath = res.tempFilePath;
-          this.setData({
-            models_list: list,
-          })
-        }
-      });
-    })
-  },
-
-  onLoad: function(options){
+  setManufacturer: function(name){
     this.setData({
-      manufacturer: options.manufacturer
-    })
-
-    db.collection('model').where({
-      manufacturer: _.eq(this.data.manufacturer)
-    }).get({
-      success: res => {
-        this.setData({
-          models_list: res.data,
-        })
-        this.showPicture(this.data.models_list);
-      }
+      manufacturer: name
     })
   },
-
-  onReady: function(){
-    
+  setModelsList: function(list){
+    console.log(list)
+    this.setData({
+      models_list: list,
+    })
+  },
+  showPicture:function(list){
+     var folder = 'model/' + this.data.manufacturer
+     cloud.getImage(list, folder, this.setModelsList)
+  },
+  getList: async function(){
+    var condition = this.data.manufacturer
+    var list = await cloud.getList('model', condition)
+    this.setModelsList(list)
+    this.showPicture(list)
+  },
+  onLoad: function(options){
+    this.setManufacturer(options.manufacturer);
+    this.getList();
   }
-  
 })

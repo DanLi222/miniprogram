@@ -7,7 +7,7 @@
     <view class="modelImageContainer">
       <image class="modelImage" src="{{item.imagePath}}" mode="widthFix"></image>
     </view>
-    <text class="modelName">{{item.model}}
+    <text class="modelName">{{item.key}}
       <text class="modelPrice">{{item.price}}</text>
     </text>
   </view>

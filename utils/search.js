@@ -8,10 +8,6 @@ function clearSearchHistory(){
   return SEARCH.searchHistory;
 }
 
-function loadSearchHistory(){
-  getSearchHistory();
-}
-
 function setSearchHistory(history){
   var historyList = SEARCH.searchHistory;
   var exist = historyList.indexOf(history);
@@ -38,5 +34,4 @@ function getSearchHistory(){
 
 module.exports.clearSearchHistory = clearSearchHistory
 module.exports.setSearchHistory = setSearchHistory
-module.exports.loadSearchHistory = loadSearchHistory
 module.exports.getSearchHistory = getSearchHistory

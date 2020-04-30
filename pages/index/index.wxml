@@ -3,9 +3,9 @@
     <view class="page-section page-section-gap">
       <swiper 
         indicator-dots="true" autoplay="true" circular="true" duration="1000" interval="2000">
-        <block wx:for="{{swiperImage}}" wx:key="*this">
+        <block wx:for="{{swiperImage}}" wx:key="swiperImage">
           <swiper-item>
-            <image class="swiper-item" wx:if="{{swiperImage.length!=0}}" src="{{item}}"></image>
+            <image class="swiper-item" src="{{item.imagePath}}"></image>
           </swiper-item>
         </block>
       </swiper>
@@ -20,7 +20,7 @@
       <view class="page-section-searchHistory" >
         <view wx:for="{{searchHistory}}" wx:key="searchHistoryItem">
         <view class="page-section-searchBox">
-          <view class="page-section-item" bindtap="searchTap" id="{{index}}">{{item}}</view>
+          <view class="page-section-item" bindtap="searchTap" data-name="searchHistory" id="{{index}}">{{item}}</view>
         </view>
         </view>
       </view>
@@ -29,7 +29,7 @@
     <view class="page-section">
       <view class="page-section-item" wx:for="{{manufacturer_list}}" wx:key="manufacturer_list" bindtap="brandListTap" id="{{index}}">
         <view class="brandImageBox"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></view>
-        <text class="brandNameBox">{{item.manufacturer}}</text>
+        <text class="brandNameBox">{{item.key}}</text>
       </view>
     </view>
   </view>
