@@ -5,19 +5,12 @@
  * The 3rd section is a list of brand with images
  */
 
-/**
- * This page requires 2 helper class
- */
 var search = require('../../utils/search.js')
 var cloud = require('../../utils/cloud.js')
 
 Page({
-  /**
-   * Page data
-   */
   data:{
     /**
-     * Variables
      * manufacturerList stores information about brand
      * searchHistory stores recently viewed brand
      * swiperImage stores information of 3 images
@@ -29,21 +22,23 @@ Page({
       {key: 'auto2'},
       {key: 'auto3'}
     ],
+    interval: 2000,
   },
+
   /**
    * Load 3 swiper images
    * Load brand list with images
    * Load searchHistory
    */
-  onLoad:function(){
+  onLoad: function(){
     this.getSwiperImage();
     this.getManufacturerList();
     this.loadSearchHistory();
   },
-  /**
+  /** 
    * Load searchHistory when redirecting to this page
    */
-  onShow:function(){
+  onShow: function(){
     this.loadSearchHistory();
   },
 
@@ -51,32 +46,20 @@ Page({
    * Navigate to corresponding brand page
    * @param {event} e - The current event
    */
-  searchTap: function(e) {
-    this.navigateToBrand(this.data.searchHistory[e.currentTarget.id]);
-  },
-  /**
-   * Navigate to corresponding brand page
-   * @param {event} e - The current event
-   */
-  brandListTap: function(e) {
-    this.navigateToBrand(this.data.manufacturerList[parseInt(e.currentTarget.id)].key);
-  },
-  /**
-   * Navigate to corresponding brand page
-   * @param {String} manufacturer - The target brand of current event
-   */
-  navigateToBrand: function(manufacturer){
+  handleTap: function(e) {
+    var manufacturer = e.currentTarget.dataset.manufacturer;
+    var pingying = e.currentTarget.dataset.pingying;
     search.setSearchHistory(manufacturer);
     wx.navigateTo({
-      url: '../brand/brand?manufacturer=' + manufacturer,
-    })
+      url: `../brand/brand?manufacturer=${manufacturer}&pingying=${pingying}`,
+    })  
   },
-
+  
   /**
    * Load swiper images from database
    */
   getSwiperImage: function(){
-    cloud.getImage(this.data.swiperImage, 'carousel', this.setSwiperImage)
+    cloud.getImage(this.data.swiperImage, 'swiper', this.setSwiperImage)
   },
   /**
    * Update page data swiperImage
@@ -120,6 +103,7 @@ Page({
     var condition = ""
     var list = await cloud.getList('manufacturer', condition);
     this.setManufacturerList(list);
+    this.loadManufacturerImage(list);
     cloud.getImage(list, 'brand', this.setManufacturerList);
   },
   /**
@@ -130,6 +114,16 @@ Page({
     this.setData({
       manufacturerList: list
     })
+  },
+  /**
+   * Add imagePath 
+   * @param {array} list - An array of objects whose imagePath needs to be updated
+   */
+  loadManufacturerImage: function(list){
+    list.forEach(item => {
+      item.imagePath = `../../images/brand/${item.key}.png`;
+      this.setManufacturerList(list);
+    });
   },
 
 })

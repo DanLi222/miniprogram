@@ -1,8 +1,7 @@
+<view class="title">
+  <text>{{manufacturer}}</text>
+</view>
 <view class="container">
-  <view class="manufactererContainer">
-    <text>{{manufacturer}}</text>
-  </view>
-
   <view class="modelList" wx:for="{{modelList}}" wx:key="modelList" data-id="{{index}}">
     <view class="modelImageContainer">
       <image class="modelImage" src="{{item.imagePath}}" mode="widthFix"></image>

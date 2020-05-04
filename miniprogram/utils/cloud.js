@@ -18,9 +18,14 @@ const _ = db.command;
  * @param {*} condition - Indicate condition when querying
  * @returns {array} list - Return a list after all records are downloaded
  */
+
 async function getList(table, condition){
   // Count number of record in database table to get batch time
-  const countResult = await db.collection(table).count();
+  const countResult = await db.collection(table)
+                              .where({
+                                display: _.eq(condition)
+                              })
+                              .count();
   const total = countResult.total;
   const MAX_LIMIT = 20;
   const batchTimes = Math.ceil(total/MAX_LIMIT);
@@ -38,7 +43,7 @@ async function getList(table, condition){
                         .get();
       tasks.push(promise);
     }
-    // Resolve when all promises haved finished
+    // Resolve when all promises have finished
     Promise.all(tasks).then(values => {
       values.forEach(value => {
         list = list.concat(value.data);// Store result value in list
@@ -61,11 +66,13 @@ function getImage(list, folder, callback){
   // Download image from database
   list.forEach(item => {
     wx.cloud.downloadFile({
-      fileID: 'cloud://dan-sbsq8.6461-dan-sbsq8-1300940270/' + folder + '/'
-            + item.key + '.png',
+      fileID: `cloud://bole-jrtl1.626f-bole-jrtl1-1302017856/${folder}/${item.key}.png`,
       success: res =>{ // Once succeed, add temporary path to list
         item.imagePath = res.tempFilePath;
         callback(list);
+      },
+      fail: err =>{
+        console.log(err)
       }
     })
   });

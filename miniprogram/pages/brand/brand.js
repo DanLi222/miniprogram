@@ -11,7 +11,8 @@ Page({
    * modelList stores a model list related to the brand
    */
   data: {
-    manufacturer:"",
+    manufacturer: "",
+    pingying: "",
     modelList: [],
   },
   /**
@@ -21,6 +22,9 @@ Page({
    */
   onLoad: function(options){
     this.setManufacturer(options.manufacturer);
+    this.setData({
+      pingying: options.pingying
+    });
     this.loadModelList();
   },
 
@@ -29,8 +33,9 @@ Page({
    * Set page data modelList and load model images
    */
   loadModelList: async function(){
-    var condition = this.data.manufacturer
-    var list = await cloud.getList('model', condition)
+    var condition = ""
+    console.log(this.data.pingying)
+    var list = await cloud.getList(this.data.pingying, condition)
     this.setModelList(list)
     this.loadImage(list)
   },
@@ -59,7 +64,6 @@ Page({
    * @param {array} list - Model list downloaded from database
    */
   setModelList: function(list){
-    console.log(list)
     this.setData({
       modelList: list,
     })

@@ -1,11 +1,22 @@
+page{
+  font-family: "微软雅黑", Arial, sans-serif;
+}
 .container{
-  margin: 3%;
+  margin-left: 3%;
+  margin-right: 3%;
 }
-.manufactererContainer{
-  width: 95%;
-  padding: 3%;
-  color: rgba(124, 125, 160, 0.815);
+.title{
+  width: 100%;
+  margin-bottom: 60rpx;
+  border-bottom: 1rpx solid lightgrey;
+  font-weight: 500;
+  font-size: larger;
+  background-color: rgba(240, 240, 240, 0.623);
+  padding-left: 3%;
+  padding-top: 5%;
+  padding-bottom: 1%;
 }
+
 .modelList{
   height: 100%;
   display: flex;
@@ -23,12 +34,9 @@
 }
 .modelName{
   width: 550rpx;
-  height: 150rpx;
   display: flex;
   line-height: 70rpx;
-  font-family: "微软雅黑", Arial, sans-serif;
   border-bottom: 1rpx solid lightgrey;
-  font-size: large;
   margin-left: 5%;
 }
 .modelPrice{

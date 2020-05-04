@@ -20,17 +20,22 @@ page{
 .title{
   justify-content: space-between;
   font-weight: bold;
-  width: 650rpx;
+  /* width: 650rpx; */
+}
+.deleteImageBox{
+  width: 50rpx;
+  height: 50rpx;
+  /* align-items: flex-end; */
 }
 .deleteImage{
-  width: 30rpx;
-  height: 30rpx;
-  align-items: flex-end;
+  width: 60%;
+  height: 60%;
+  padding: 20%;
 }
 .page-section-searchBox{
   width: fit-content;
   border-radius: 20px;
-  background-color: rgba(231, 228, 228, 0.575);
+  background-color: rgba(226, 221, 221, 0.575);
   display: inline-block;
   white-space: nowrap;
   margin-right: 30rpx; 
@@ -44,7 +49,9 @@ page{
   height: 110rpx;
 }
 .brandImage{
-  width: 100%;
+  width: 85%;
+  max-height: 85%;
+  margin: 7.5%;
 }
 .brandNameBox{
   width: 550rpx;
