@@ -1,12 +1,13 @@
-# 云开发 quickstart
+# Bole car
+This is a wechat mini program for displaying cars from different brands with prices.
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+# Installation
+Download Wechat DevTools
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
+# Environment
+AppID: AppID is needed in order to use Cloud Base, this can be applied on Wechat offical accounts platform. Change the "appid" information in project.config.json file to your own AppID.
+Cloud Base: Cloud Base provides developers with a completely native cloud and WeChat support. Click the "Cloud Base" button on the left side of the Developer Tools toolbar to open up the Cloud Console, and then enable Cloud Base and create a cloud environment as instructed. This might take 10 minutes.
 
-## 参考文档
-
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
+## References
+- [Wechat DevTools](https://developers.weixin.qq.com/miniprogram/en/dev/devtools/download.html)
+- [Wechat Official Accounts Platform](https://mp.weixin.qq.com/) 
