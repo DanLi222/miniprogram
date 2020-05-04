@@ -48,10 +48,11 @@ Page({
    */
   handleTap: function(e) {
     var manufacturer = e.currentTarget.dataset.manufacturer;
-    var pingying = e.currentTarget.dataset.pingying;
+    var pingying = manufacturer.pingying;
     search.setSearchHistory(manufacturer);
     wx.navigateTo({
-      url: `../brand/brand?manufacturer=${manufacturer}&pingying=${pingying}`,
+      //url: `../brand/brand?manufacturer=${manufacturer}`,
+      url: `../brand/brand?manufacturer=${manufacturer.key}&pingying=${pingying}`,
     })  
   },
   

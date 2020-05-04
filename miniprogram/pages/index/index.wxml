@@ -22,14 +22,14 @@
       <view class="page-section-searchHistory" >
         <view wx:for="{{searchHistory}}" wx:key="searchHistoryItem">
         <view class="page-section-searchBox">
-          <view class="page-section-item" bindtap="handleTap" data-manufacturer="{{item}}" id="{{index}}">{{item}}</view>
+          <view class="page-section-item" bindtap="handleTap" data-manufacturer="{{item}}" id="{{index}}">{{item.key}}</view>
         </view>
         </view>
       </view>
     </view>
     
     <view class="page-section">
-      <view class="page-section-item" wx:for="{{manufacturerList}}" wx:key="manufacturerList" bindtap="handleTap" data-manufacturer="{{item.key}}" data-pingying="{{item.pingying}}" id="{{index}}">
+      <view class="page-section-item" wx:for="{{manufacturerList}}" wx:key="manufacturerList" bindtap="handleTap" data-manufacturer="{{item}}" data-pingying="{{item.pingying}}" id="{{index}}">
         <view class="brandImageBox"><image class="brandImage" src="{{item.imagePath}}" mode="widthFix"></image></view>
         <text class="brandNameBox">{{item.key}}</text>
       </view>

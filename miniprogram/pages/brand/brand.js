@@ -34,7 +34,6 @@ Page({
    */
   loadModelList: async function(){
     var condition = ""
-    console.log(this.data.pingying)
     var list = await cloud.getList(this.data.pingying, condition)
     this.setModelList(list)
     this.loadImage(list)
