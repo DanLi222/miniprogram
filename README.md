@@ -11,3 +11,6 @@ Cloud Base: Cloud Base provides developers with a completely native cloud and We
 ## References
 - [Wechat DevTools](https://developers.weixin.qq.com/miniprogram/en/dev/devtools/download.html)
 - [Wechat Official Accounts Platform](https://mp.weixin.qq.com/) 
+
+## Screen shots
+![App Screen shot](https://drive.google.com/open?id=1taf8vPT9BCxlikRvjKMSfnO0qBVAihW4)
