@@ -13,5 +13,6 @@ Download Wechat DevTools
 - [Wechat Official Accounts Platform](https://mp.weixin.qq.com/) 
 
 ## Screen shots
-![App Screen shot - brand](https://drive.google.com/file/d/1GN4do-OkHe-33RutzWwv4a0PLuUZT4TA/view?usp=sharing)
-![App Screen shot - index](https://drive.google.com/file/d/1CDJm9Vd8q2yZcTMqGzjUnZ2DoDjIlEQ-/view?usp=sharing)
+- ![App Screen shot - brand](https://drive.google.com/file/d/1GN4do-OkHe-33RutzWwv4a0PLuUZT4TA/view?usp=sharing)
+- ![App Screen shot - index](https://drive.google.com/file/d/1CDJm9Vd8q2yZcTMqGzjUnZ2DoDjIlEQ-/view?usp=sharing)
+- ![Footprint](https://photos.app.goo.gl/S7wLE73WaWsnJfDs8)
